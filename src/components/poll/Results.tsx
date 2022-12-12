@@ -1,0 +1,85 @@
+import { Link, useParams } from "react-router-dom";
+import dayjs from "dayjs";
+import { DAYS, MONTHS } from "../../constants";
+import { usePoll } from "../../routes/poll";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import TimeDisplay from "./TimeDisplay";
+
+const Results: React.FC = () => {
+  const { shortkey } = useParams<{ shortkey: string }>();
+  const { poll } = usePoll();
+  const { dates, timezone } = poll;
+
+  return (
+    <>
+      <Typography
+        variant="body2"
+        color="GrayText"
+        sx={{ mt: 2, fontWeight: "bold" }}
+      >
+        RESULTS
+      </Typography>
+      <Typography variant="subtitle2" sx={{ mt: 0.5 }}>
+        Timezone: {timezone}
+      </Typography>
+      <Stack spacing={1} sx={{ mt: 2 }}>
+        {dates.map((d) => {
+          const date = dayjs(d.date);
+          return (
+            <Box key={d.id} sx={{ display: "flex", gap: 2 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  bgcolor: "primary.main",
+                  color: (theme) =>
+                    theme.palette.getContrastText(theme.palette.primary.main),
+                  borderRadius: 2,
+                  px: 1,
+                  minHeight: "4rem",
+                  minWidth: "4rem",
+                }}
+              >
+                <Typography variant="caption">
+                  {DAYS[date.day()]} {date.date()}
+                </Typography>
+                <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                  {MONTHS[date.month()]}
+                </Typography>
+              </Box>
+              <Box sx={{ flex: 1 }}>
+                <Stack spacing={1}>
+                  {d.times.map((t) => (
+                    <TimeDisplay key={t.id} time={t} />
+                  ))}
+                </Stack>
+              </Box>
+            </Box>
+          );
+        })}
+      </Stack>
+      <Button
+        to={`/p/${shortkey}/`}
+        component={Link}
+        variant="outlined"
+        size="large"
+        fullWidth
+        sx={{
+          textTransform: "none",
+          fontWeight: "bold",
+          height: "3rem",
+          mt: 2,
+        }}
+      >
+        Back to voting
+      </Button>
+    </>
+  );
+};
+
+export default Results;
