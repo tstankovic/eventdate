@@ -24,7 +24,7 @@ const Index: React.FC = () => (
         textAlign: "center",
       }}
     >
-      Decide with a poll
+      Decide with a date poll
     </Typography>
     <Button
       variant="contained"

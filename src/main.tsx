@@ -6,12 +6,9 @@ import Root from "./routes/root";
 import Index from "./routes/index";
 import Create from "./routes/create";
 import ErrorPage from "./error-page";
-import Poll, {
-  loader as pollLoader,
-  action as pollAction,
-} from "./routes/poll";
-import Voting from "./components/poll/Voting";
-import Results from "./components/poll/Results";
+import Poll, { loader as pollLoader } from "./routes/poll";
+import Vote, { action as voteAction } from "./routes/vote";
+import Result from "./routes/result";
 
 const router = createBrowserRouter([
   {
@@ -19,16 +16,28 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Index /> },
-      { path: "/create", element: <Create /> },
+      {
+        index: true,
+        element: <Index />,
+      },
+      {
+        path: "/create",
+        element: <Create />,
+      },
       {
         path: "/p/:shortkey",
         element: <Poll />,
         loader: pollLoader,
-        action: pollAction,
         children: [
-          { index: true, element: <Voting /> },
-          { path: "results", element: <Results /> },
+          {
+            index: true,
+            element: <Vote />,
+            action: voteAction,
+          },
+          {
+            path: "results",
+            element: <Result />,
+          },
         ],
       },
     ],

@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ mode, setMode }) => {
           justifyContent: "space-between",
         }}
       >
-        <Link to="/">
+        <Link to="/" style={{ display: "inherit" }}>
           <img src={logo} alt="logo" />
         </Link>
         <IconButton onClick={handleModeChange}>

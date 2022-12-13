@@ -1,20 +1,40 @@
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import dayjs from "dayjs";
-import { DAYS, MONTHS } from "../../constants";
-import { usePoll } from "../../routes/poll";
+import { DAYS, MONTHS } from "../constants";
+import { usePoll } from "../routes/poll";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import TimeDisplay from "./TimeDisplay";
+import TimeDisplay from "../components/poll/TimeDisplay";
 
-const Results: React.FC = () => {
-  const { shortkey } = useParams<{ shortkey: string }>();
+const Result: React.FC = () => {
   const { poll } = usePoll();
   const { dates, timezone } = poll;
 
+  const [showBackToVotingBtn, setShowBackToVotingBtn] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.fromVoting) {
+      setShowBackToVotingBtn(true);
+      history.replaceState({}, "");
+    }
+  }, []);
+
   return (
-    <>
+    <Box
+      sx={{
+        border: 1,
+        borderColor: "divider",
+        borderRadius: 2,
+        backgroundColor: "background.paper",
+        p: 2,
+        mt: 2,
+      }}
+    >
       <Typography
         variant="body2"
         color="GrayText"
@@ -63,23 +83,25 @@ const Results: React.FC = () => {
           );
         })}
       </Stack>
-      <Button
-        to={`/p/${shortkey}/`}
-        component={Link}
-        variant="outlined"
-        size="large"
-        fullWidth
-        sx={{
-          textTransform: "none",
-          fontWeight: "bold",
-          height: "3rem",
-          mt: 2,
-        }}
-      >
-        Back to voting
-      </Button>
-    </>
+      {showBackToVotingBtn && (
+        <Button
+          to=".."
+          component={Link}
+          variant="outlined"
+          size="large"
+          fullWidth
+          sx={{
+            textTransform: "none",
+            fontWeight: "bold",
+            height: "3rem",
+            mt: 2,
+          }}
+        >
+          Back to voting
+        </Button>
+      )}
+    </Box>
   );
 };
 
-export default Results;
+export default Result;
