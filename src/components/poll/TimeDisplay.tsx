@@ -50,7 +50,7 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ time }) => (
         </Stack>
       </Box>
     </Box>
-    <Stack spacing={1} direction="row" sx={{ mt: 1 }}>
+    <Stack direction="row" sx={{ gap: 1, flexWrap: "wrap", mt: 1 }}>
       {time.votes.map((v) => (
         <Chip
           key={v.id}
