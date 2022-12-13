@@ -32,7 +32,6 @@ const Result: React.FC = () => {
         borderRadius: 2,
         backgroundColor: "background.paper",
         p: 2,
-        mt: 2,
       }}
     >
       <Typography
