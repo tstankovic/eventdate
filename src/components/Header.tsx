@@ -39,9 +39,9 @@ const Header: React.FC<HeaderProps> = ({ mode, setMode }) => {
         </Link>
         <IconButton onClick={handleModeChange}>
           {mode === "light" ? (
-            <LightModeOutlinedIcon />
-          ) : (
             <DarkModeOutlinedIcon />
+          ) : (
+            <LightModeOutlinedIcon />
           )}
         </IconButton>
       </Container>

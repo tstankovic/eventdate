@@ -11,7 +11,7 @@ import TimeDisplay from "../components/poll/TimeDisplay";
 
 const Result: React.FC = () => {
   const { poll } = usePoll();
-  const { dates, timezone } = poll;
+  const { title, dates, timezone } = poll;
 
   const [showBackToVotingBtn, setShowBackToVotingBtn] = useState(false);
 
@@ -34,6 +34,9 @@ const Result: React.FC = () => {
         p: 2,
       }}
     >
+      <Typography variant="h3" sx={{ fontWeight: "lighter" }}>
+        {title}
+      </Typography>
       <Typography
         variant="body2"
         color="GrayText"
