@@ -1,8 +1,8 @@
 import React from "react";
 import { useTheme } from "@mui/material";
 import { v4 as uuid } from "uuid";
-import { SelectedDate as SelectedDateType, Time } from "../../types";
-import { HOURS, MINUTES } from "../../constants";
+import { SelectedDate as SelectedDateType, Time } from "../../utils/types";
+import { HOURS, MINUTES } from "../../utils/constants";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";

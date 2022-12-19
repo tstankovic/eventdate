@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { TimeType } from "../../types";
+import { TimeType } from "../../utils/types";
 
 type TimeVoteProps = {
   time: TimeType;

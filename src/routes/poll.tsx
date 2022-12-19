@@ -1,51 +1,18 @@
 import React, { useEffect } from "react";
 import {
-  ActionFunction,
   LoaderFunction,
   Outlet,
-  redirect,
   useLoaderData,
   useOutletContext,
 } from "react-router-dom";
-import { supabase } from "../supabaseClient";
-import { Poll as PollType } from "../types";
+import { getPoll } from "../utils/api";
+import { Poll as PollType } from "../utils/types";
 import { styled, Theme } from "@mui/material";
 import Container from "@mui/material/Container";
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const { data } = await supabase
-    .from("polls")
-    .select(
-      `
-      id,
-      shortkey,
-      title,
-      timezone,
-      dates (
-        id,
-        date,
-        times (
-          id,
-          hour,
-          minute,
-          votes (
-            id,
-            name,
-            vote
-          )
-        )
-      )
-      `
-    )
-    .filter("shortkey", "eq", params.shortkey);
-
-  if (!data || !data[0]) {
-    throw new Response("", { status: 404, statusText: "Not found" });
-  }
-
-  return {
-    poll: data[0],
-  };
+  const poll = await getPoll(params.shortkey || "");
+  return { poll };
 };
 
 const PollWrapper = styled("div")(({ theme }) => ({

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import dayjs from "dayjs";
-import { DAYS, MONTHS } from "../constants";
+import { DAYS, MONTHS } from "../utils/constants";
 import { usePoll } from "../routes/poll";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";

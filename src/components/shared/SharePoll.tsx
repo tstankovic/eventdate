@@ -1,4 +1,4 @@
-import { Poll } from "../../types";
+import { Poll } from "../../utils/types";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";

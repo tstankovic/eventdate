@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ActionFunction, Link, redirect, useSubmit } from "react-router-dom";
 import dayjs from "dayjs";
-import { supabase } from "../supabaseClient";
-import { DAYS, MONTHS } from "../constants";
-import { Votes } from "../types";
+import { supabase } from "../utils/supabaseClient";
+import { DAYS, MONTHS } from "../utils/constants";
+import { Votes } from "../utils/types";
 import { usePoll } from "./poll";
 import SharePoll from "../components/shared/SharePoll";
 import TimeVote from "../components/poll/TimeVote";
@@ -12,11 +12,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { castVotes } from "../utils/api";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const rows = JSON.parse(formData.get("votes") as string);
-  await supabase.from("votes").insert(rows);
+  await castVotes(formData.get("votes") as string);
   return redirect("results");
 };
 
